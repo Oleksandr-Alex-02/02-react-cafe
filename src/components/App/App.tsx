@@ -32,10 +32,10 @@ export default function App() {
     });
   };
 
-  // const totalVotes = votes.good + votes.neutral + votes.bad;
-  // const positiveRate = totalVotes
-  //   ? Math.round((votes.good / totalVotes) * 100)
-  //   : 0
+  const totalVotes = votes.good + votes.neutral + votes.bad;
+  const positiveRate = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
+    : 0
 
   return (
     <section className={css.app}>
