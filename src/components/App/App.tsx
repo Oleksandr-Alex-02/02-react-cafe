@@ -10,7 +10,6 @@ import VoteOptions from '../VoteOptions/VoteOptions';
 import Notification from '../Notification/Notification';
 
 
-
 export default function App() {
   const [votes, setVotes] = useState<Votes>({
     good: 0,
@@ -32,26 +31,28 @@ export default function App() {
       bad: 0,
     });
   };
-
+  props
   const totalVotes = votes.good + votes.neutral + votes.bad;
-  const positiveRate = Math.round(votes.good * 100 / totalVotes)
+  const positiveRate = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
+    : 0
 
   return (
-    <div className={css.app}>
+    <section className={css.app}>
       <CafeInfo />
       <VoteOptions
         onVote={onVote}
-        totalVotes={totalVotes}
-        resetVotes={onReset}
+        canReset={totalVotes > 0}
+        onReset={onReset}
       />
       {totalVotes > 0 ? (
         <VoteStats
           votes={votes}
-          total={totalVotes}
-          positive={positiveRate}
+          totalVotes={totalVotes}
+          positiveRate={positiveRate}
         />) : (
         <Notification />
       )}
-    </div>
+    </section>
   );
 }
